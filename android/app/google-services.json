@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1003184059110",
+    "project_id": "step-by-step-a9706",
+    "storage_bucket": "step-by-step-a9706.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003184059110:android:8da3df9547c4cbdc580127",
+        "android_client_info": {
+          "package_name": "com.flutter.step_by_step"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003184059110-hoccsqcics6q3klri7fdksufqdi7rd88.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADRkKO2Zko4wzJ-ZTRkAgGG8OEbdxBja4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003184059110-hoccsqcics6q3klri7fdksufqdi7rd88.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
