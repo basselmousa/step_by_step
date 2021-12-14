@@ -62,11 +62,16 @@ class UserController {
       sharedPreferences.setString("uid", userCredential.user.uid);
       buildSnackBar(context, "Logged In");
       print(userCredential.user.metadata);
-     // userCredential.user.
-      // if(userCredential.user['isAdmin']){
-      //
-      // }
-      // moveScreen(context, RoutesConstants.BOOK_RESERVATION_ROUTE_PATH);
+      await FirebaseFirestore.instance.collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME).doc(userCredential.user.uid).get().then((value) {
+        if(value.exists){
+          if(value.data()['isAdmin']){
+            moveScreen(context, RoutesConstants.LIBRARY_ADMIN_ROUTE_PATH);
+          }
+          else{
+            moveScreen(context, RoutesConstants.BOOK_RESERVATION_ROUTE_PATH);
+          }
+        }
+      });
 
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

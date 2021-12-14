@@ -10,6 +10,6 @@ class LibraryAdmin extends StatefulWidget {
 class _LibraryAdminState extends State<LibraryAdmin> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(body: Container());
   }
 }
