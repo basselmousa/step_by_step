@@ -6,14 +6,11 @@ import 'package:step_by_step/mvc/utils/utils.dart';
 import 'package:step_by_step/mvc/views/widgets/container_widget.dart';
 
 class AppointmentBooking extends StatefulWidget {
-
   @override
   _AppointmentBookingState createState() => _AppointmentBookingState();
 }
 
 class _AppointmentBookingState extends State<AppointmentBooking> {
-
-
   showAlertDialog(BuildContext context, String id, String name) {
     // set up the buttons
     Widget cancelButton = TextButton(
@@ -32,8 +29,7 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("حجز كتاب"),
-      content: Text(
-          "هل تود تأكيد حجزك مع $name"),
+      content: Text("هل تود تأكيد حجزك مع $name"),
       actions: [
         cancelButton,
         continueButton,
@@ -49,27 +45,26 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
     );
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-
         children: [
           Padding(
-            padding: const EdgeInsets.only(
-                top: 150, left: 15, right: 15, bottom: 15),
+            padding: const EdgeInsets.fromLTRB(15, 150, 15, 15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                buildContainer("العميد", ()
-=>
-                  showAlertDialog(
-                      context, "${AdminIdConstants.ADMINS_ID['dean']}","العميد")
-                  ,),
+                buildContainer(
+                  "العميد",
+                  () => showAlertDialog(context,
+                      "${AdminIdConstants.ADMINS_ID['dean']}", "العميد"),
+                ),
                 buildContainer("رئيس القسم", () {
                   showAlertDialog(
-                      context, "${AdminIdConstants.ADMINS_ID['headofdepartment']}","رئيس القسم");
+                      context,
+                      "${AdminIdConstants.ADMINS_ID['headofdepartment']}",
+                      "رئيس القسم");
                 }),
               ],
             ),
@@ -78,32 +73,36 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
             padding: const EdgeInsets.all(15),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-
               children: [
                 buildContainer("القبول والتسجيل", () {
                   showAlertDialog(
-                      context, "${AdminIdConstants.ADMINS_ID['admissions']}","القبول والتسجيل");
+                      context,
+                      "${AdminIdConstants.ADMINS_ID['admissions']}",
+                      "القبول والتسجيل");
                 }),
                 buildContainer("مالية", () {
-                  showAlertDialog(
-                      context, "${AdminIdConstants.ADMINS_ID['finance']}","مالية");
+                  showAlertDialog(context,
+                      "${AdminIdConstants.ADMINS_ID['finance']}", "مالية");
                 }),
               ],
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(15),
+            padding: const EdgeInsets.only(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
-
               children: [
                 buildContainer("شؤون الطلبة", () {
                   showAlertDialog(
-                      context, "${AdminIdConstants.ADMINS_ID['deanshipofstudentaffairs']}","شؤون الطلبة");
+                      context,
+                      "${AdminIdConstants.ADMINS_ID['deanshipofstudentaffairs']}",
+                      "شؤون الطلبة");
                 }),
                 buildContainer("المركز الصحي", () {
                   showAlertDialog(
-                      context, "${AdminIdConstants.ADMINS_ID['healthcenter']}","المركز الصحي");
+                      context,
+                      "${AdminIdConstants.ADMINS_ID['healthcenter']}",
+                      "المركز الصحي");
                 }),
               ],
             ),
@@ -111,10 +110,11 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
           Center(
             child: buildContainer("خدمة العلم", () {
               showAlertDialog(
-                  context, "${AdminIdConstants.ADMINS_ID['militaryservice']}","خدمة العلم");
+                  context,
+                  "${AdminIdConstants.ADMINS_ID['militaryservice']}",
+                  "خدمة العلم");
             }),
           )
-
         ],
       ),
     );

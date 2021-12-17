@@ -23,31 +23,31 @@ class _LoginScreenState extends State<LoginScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    autoLogin();
+    //autoLogin();
   }
 
-  void autoLogin() async {
-    setState(() {
-      tryLoginIn = true;
-    });
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-   // await preferences.clear();
-    if (preferences.getString("email") != null &&
-        preferences.getString("password") != null) {
-      await UserController()
-          .login(preferences.getString("email").toString(),
-          preferences.getString("password").toString(), context)
-          .whenComplete(() => setState(() {
-        tryLoginIn = false;
-      }));
-
-      return;
-    }
-    setState(() {
-      tryLoginIn = false;
-    });
-    return;
-  }
+  // void autoLogin() async {
+  //   setState(() {
+  //     tryLoginIn = true;
+  //   });
+  //   SharedPreferences preferences = await SharedPreferences.getInstance();
+  //  // await preferences.clear();
+  //   if (preferences.getString("email") != null &&
+  //       preferences.getString("password") != null) {
+  //     await UserController()
+  //         .login(preferences.getString("email").toString(),
+  //         preferences.getString("password").toString(), context)
+  //         .whenComplete(() => setState(() {
+  //       tryLoginIn = false;
+  //     }));
+  //
+  //     return;
+  //   }
+  //   setState(() {
+  //     tryLoginIn = false;
+  //   });
+  //   return;
+  // }
 
   @override
   Widget build(BuildContext context) {

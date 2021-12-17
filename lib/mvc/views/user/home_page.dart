@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            buildContainer("حجز دور", (){moveScreen(context, RoutesConstants.APPOINTMENT_BOOKING_ROUTE_PATH);}),
+            buildContainer("حجز دور", (){moveScreen(context, RoutesConstants.APPOINTMENT_BOOKING_ROUTE_PATH,replacement: false);}),
             buildContainer("حجز كتاب", (){moveScreen(context, RoutesConstants.LOGIN_ROUTE_PATH);}),
 
           ],

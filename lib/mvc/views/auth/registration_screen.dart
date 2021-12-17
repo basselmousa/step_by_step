@@ -71,7 +71,7 @@ bool trySignUp = false;
                     },
                     child: trySignUp ? CircularProgressIndicator() : Text("Create Account"),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.white,
+                      primary: ColorConstants.COLOR_Red,
                       onPrimary: Colors.black45,
                       textStyle: TextStyle(
                           fontWeight: FontWeight.bold,
