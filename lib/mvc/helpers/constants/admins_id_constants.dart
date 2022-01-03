@@ -1,11 +1,11 @@
 class AdminIdConstants {
   static const Map<String , String> ADMINS_ID = {
-    'militaryservice': 'qFcYaP090QNYA1quvdZVyxce4Tq2',
-    'deanshipofstudentaffairs': 'd8O8aC4lKqSOp9ZWbHD6vHG8rWZ2',
-    'healthcenter': 'Tp5r8v5J0nVdfndabNVB2Cq9LMj2',
-    'admissions': '10ubHUXfUgPc0YwoeRXY3da6iqD3',
-    'finance': 'nhtwFefb4ng7AFwHyGpOTFjt1Am2',
-    'headofdepartment': 'SNRT7GKp5jbVdc8JTPdfnVrcM063',
-    'dean': 'sKAqMVhvebgC4R2lHg2144oOoCR2'
+    'militaryservice': 'FOlaqfHGqDQCYF1PtUr79eGvyhS2',
+    'deanshipofstudentaffairs': '63pBEwd13icEpRcro7nXzzY4bPf2',
+    'healthcenter': '0gfYbNcAGlSarpwHonHrPrtoaPg2',
+    'admissions': 'AnvRErexcCaffak0KEx68ZfussC3',
+    'finance': '3wwvBoDGWDM9F8QyhJvRrfSEd3e2',
+    'headofdepartment': 'NAojIWysaZRpyxtJ9NHtT13SIHS2',
+    'dean': 'bDGtfP7GQWapqUSYyweKUm1pG4w2',
   };
 }

@@ -73,7 +73,7 @@ class _BookReservationState extends State<BookReservation> {
                             fontSize: FontConstants.TEXT_Font20,
                             fontWeight: FontWeight.bold),
                       ),
-                      ElevatedButton(
+                      ElevatedButton (
                         onPressed: () {
                           showAlertDialog(context);
                         },

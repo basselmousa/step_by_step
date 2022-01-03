@@ -1,5 +1,6 @@
 import 'package:step_by_step/mvc/helpers/constants/firebase_collection_names_constants.dart';
 import 'package:step_by_step/mvc/helpers/routes/app_routes.dart';
+import 'package:step_by_step/mvc/models/admin_model.dart';
 import 'package:step_by_step/mvc/models/user_model.dart' as Model;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -65,7 +66,21 @@ class UserController {
       await FirebaseFirestore.instance.collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME).doc(userCredential.user.uid).get().then((value) {
         if(value.exists){
           if(value.data()['isAdmin']){
-            moveScreen(context, RoutesConstants.LIBRARY_ADMIN_ROUTE_PATH);
+            switch(value.data()['type']){
+              case 'militaryservice':
+              case 'deanshipofstudentaffairs':
+              case 'healthcenter':
+              case 'admissions':
+              case 'finance':
+              case 'headofdepartment':
+              case 'dean':
+                Admin.id = value.id;
+                Admin.type = value.data()['type'].toString();
+              moveScreen(context, RoutesConstants.ADMIN_HOME_PAGE_ROUTE_PATH);
+                break;
+              case 'library':
+                moveScreen(context, RoutesConstants.LIBRARY_ADMIN_ROUTE_PATH);
+            }
           }
           else{
             moveScreen(context, RoutesConstants.BOOK_RESERVATION_ROUTE_PATH);

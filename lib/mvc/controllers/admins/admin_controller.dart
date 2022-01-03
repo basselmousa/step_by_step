@@ -57,4 +57,16 @@ class AdminController {
 
   }
 
+  Stream<DocumentSnapshot> getTurns(String id){
+    return FirebaseFirestore.instance.collection('roles').doc(id).snapshots();
+  }
+
+  Future<void> done(String id)async {
+    await FirebaseFirestore.instance.collection('roles').doc(id).get().then((value){
+      FirebaseFirestore.instance.collection('roles').doc(value.id).update({
+        'turn' : value.data()['turn']-1,
+        'current' : value.data()['current'] != null ? value.data()['current']+  1 : 2
+      });
+    });
+  }
 }

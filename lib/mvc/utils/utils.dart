@@ -12,7 +12,12 @@ moveScreen(context,page ,{replacement = true, data}){
   }
 }
 String returnEmail(String id){
-  return id + '@std.wise.edu.jo';
+
+  if(int.tryParse(id) != null){
+    return id + '@std.wise.edu.jo';
+
+  }
+  return id+'@wise.edu.jo';
 }
 
 buildSnackBar(context, String text){
