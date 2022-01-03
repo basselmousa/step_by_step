@@ -55,35 +55,48 @@ class _BookReservationState extends State<BookReservation> {
                 child: Container(
                   child: Column(
                     children: [
-                      Text(
-                        'الاسم',
-                        style: TextStyle(
-                            fontSize: FontConstants.TEXT_Font20,
-                            fontWeight: FontWeight.bold),
+                      Row(
+                        children: [
+                          Image.asset(
+                            "",
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                'الاسم',
+                                style: TextStyle(
+                                    fontSize: FontConstants.TEXT_Font20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'الوصف',
+                                style: TextStyle(
+                                    fontSize: FontConstants.TEXT_Font20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                'الحالة',
+                                style: TextStyle(
+                                    fontSize: FontConstants.TEXT_Font20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                      Text(
-                        'الوصف',
-                        style: TextStyle(
-                            fontSize: FontConstants.TEXT_Font20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'الحالة',
-                        style: TextStyle(
-                            fontSize: FontConstants.TEXT_Font20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      ElevatedButton (
-                        onPressed: () {
-                          showAlertDialog(context);
-                        },
-                        child: Text("احجز"),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.blue,
-                          onPrimary: Colors.black45,
-                          textStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: FontConstants.TEXT_Font20),
+                      Center(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showAlertDialog(context);
+                          },
+                          child: Text("احجز"),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.blue,
+                            onPrimary: Colors.black45,
+                            textStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: FontConstants.TEXT_Font20),
+                          ),
                         ),
                       ),
                     ],
