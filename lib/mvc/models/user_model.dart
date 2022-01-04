@@ -10,7 +10,7 @@ class User with ChangeNotifier {
   String fullName;
   String password;
   String? uid;
-
+  static String id = '';
   DateTime? _expiryDate;
   Timer? _authTimer;
 
@@ -35,5 +35,11 @@ class User with ChangeNotifier {
       "password": password,
       "uid": uid,
     };
+  }
+
+  static getId() async{
+    SharedPreferences preferences =  await SharedPreferences.getInstance();
+    String _id = preferences.get('email').toString().substring(0, preferences.get('email').toString().indexOf('@'));
+    id = _id;
   }
 }
