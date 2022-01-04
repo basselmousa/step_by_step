@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:step_by_step/mvc/controllers/admins/admin_controller.dart';
 import 'package:step_by_step/mvc/helpers/constants/colors_constants.dart';
 import 'package:step_by_step/mvc/helpers/constants/font_constants.dart';
+import 'package:step_by_step/mvc/models/book_model.dart';
 import 'package:step_by_step/mvc/views/widgets/edit_text_widget.dart';
 
 class LibraryAdmin extends StatefulWidget {
@@ -18,8 +20,9 @@ class _LibraryAdminState extends State<LibraryAdmin> {
   TextEditingController _bookNameController = new TextEditingController();
   TextEditingController _bookNumberController = new TextEditingController();
   TextEditingController _bookStatusController = new TextEditingController();
-  TextEditingController _bookDescriptionController = new TextEditingController();
-  var _imageFile;
+  TextEditingController _bookDescriptionController =
+      new TextEditingController();
+  late File _imageFile;
 
   final picker = ImagePicker();
 
@@ -28,11 +31,11 @@ class _LibraryAdminState extends State<LibraryAdmin> {
         .getImage(source: ImageSource.gallery)
         .then((value) => setState(() {
               _imageFile = File(value.path);
+              print(_imageFile.path);
             }))
         .catchError((onError) {
       print(onError.toString());
     });
-
   }
 
   Future pickImageFromCamera() async {
@@ -40,12 +43,13 @@ class _LibraryAdminState extends State<LibraryAdmin> {
         .getImage(source: ImageSource.camera)
         .then((value) => setState(() {
               _imageFile = File(value.path);
-              print(_imageFile);
+              print(_imageFile
+                  .toString()
+                  .substring(_imageFile.toString().indexOf('P')));
             }))
         .catchError((onError) {
       print(onError.toString());
     });
-
   }
 
   showAlertDialog(BuildContext context) {
@@ -182,29 +186,42 @@ class _LibraryAdminState extends State<LibraryAdmin> {
                 );
               }),
           Center(
-            child: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  editTextWithCenterAlign(_bookNameController, "اسم الكتاب "),
-                  editTextWithCenterAlign(_bookNumberController, "رقم الكتاب "),
-                  editTextWithCenterAlign(_bookDescriptionController, "وصف الكتاب "),
-                  editTextWithCenterAlign(
-                      _bookStatusController, "خالة الكتاب "),
-                  Row(
-                    // mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    editTextWithCenterAlign(_bookNameController, "اسم الكتاب "),
+                    editTextWithCenterAlign(_bookNumberController, "رقم الكتاب "),
+                    editTextWithCenterAlign(
+                        _bookDescriptionController, "وصف الكتاب "),
+                    editTextWithCenterAlign(
+                        _bookStatusController, "حالة الكتاب "),
+                    Row(
+                      // mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
 
-                    children: [
-                      ElevatedButton(
-                          onPressed: () => pickImageFromGallery(),
-                          child: Text("From Gallery")),
-                      ElevatedButton(
-                          onPressed: () => pickImageFromCamera(),
-                          child: Text("Camera")),
-                    ],
-                  ),
-                ],
+                      children: [
+                        ElevatedButton(
+                            onPressed: () => pickImageFromGallery(),
+                            child: Text("From Gallery")),
+                        ElevatedButton(
+                            onPressed: () => pickImageFromCamera(),
+                            child: Text("Camera")),
+                      ],
+                    ),
+                    ElevatedButton(
+                        onPressed: () => AdminController().addBook(
+                            Book(
+                                name: _bookNameController.text,
+                                bookNo: _bookNumberController.text,
+                                description: _bookDescriptionController.text,
+                                status: _bookStatusController.text),
+                            _imageFile,
+                            context),
+                        child: Text("Add")),
+                  ],
+                ),
               ),
             ),
           )
