@@ -7,11 +7,14 @@ import 'package:step_by_step/mvc/utils/utils.dart';
 
 class BookController {
   Stream<QuerySnapshot> getBooks() {
-    Future.delayed(Duration.zero, ()=> fill());
+
+    Future.delayed(Duration.zero, () {
+      fill();
+    });
     return FirebaseFirestore.instance.collection('books').snapshots();
   }
 
-  Future<void> bookReservation(String id, BuildContext context) async {
+  Future<void> bookReservation(String id,String name, BuildContext context) async {
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await FirebaseFirestore.instance.collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME)
         .doc(preferences.get('uid').toString()).get().then((value) {
@@ -21,6 +24,7 @@ class BookController {
           .doc()
           .set({
         'bookId': id,
+        'bookName': name,
         'userName' : value.data()['fullName'],
         'userNumber' :  value.data()['email'].toString().substring(0,  value.data()['email'].toString().indexOf('@')),
         'status' : 'pending'
@@ -37,6 +41,10 @@ class BookController {
 
       });
     });
+  }
+
+  static empty(){
+    Reservation.reservations = {};
   }
 
 }
