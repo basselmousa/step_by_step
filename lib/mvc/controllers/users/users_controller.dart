@@ -63,7 +63,10 @@ class UserController {
       sharedPreferences.setString("uid", userCredential.user.uid);
       buildSnackBar(context, "Logged In");
       print(userCredential.user.metadata);
-      await FirebaseFirestore.instance.collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME).doc(userCredential.user.uid).get().then((value) {
+      await FirebaseFirestore.instance.collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME)
+          .doc(userCredential.user.uid)
+          .get()
+          .then((value) {
         if(value.exists){
           if(value.data()['isAdmin']){
             switch(value.data()['type']){
