@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:step_by_step/mvc/controllers/admins/admin_controller.dart';
 import 'package:step_by_step/mvc/helpers/constants/admins_id_constants.dart';
 import 'package:step_by_step/mvc/helpers/constants/font_constants.dart';
+import 'package:step_by_step/mvc/helpers/routes/app_routes.dart';
 import 'package:step_by_step/mvc/utils/utils.dart';
 import 'package:step_by_step/mvc/views/widgets/container_widget.dart';
 
@@ -22,7 +23,9 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
     Widget continueButton = TextButton(
       child: Text("تأكيد الحجز"),
       onPressed: () {
-        AdminController.addOrUpdateRole(context: context, id: id);
+        AdminController.addOrUpdateRole(context: context, id: id).then((
+            value) => moveScreen(context, RoutesConstants.SHOW_TURN_ROUTE_PATH)
+            );
       },
     );
 
@@ -57,8 +60,9 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
               children: [
                 buildContainer(
                   "العميد",
-                  () => showAlertDialog(context,
-                      "${AdminIdConstants.ADMINS_ID['dean']}", "العميد"),
+                      () =>
+                      showAlertDialog(context,
+                          "${AdminIdConstants.ADMINS_ID['dean']}", "العميد"),
                 ),
                 buildContainer("رئيس القسم", () {
                   showAlertDialog(
@@ -95,7 +99,8 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
                 buildContainer("شؤون الطلبة", () {
                   showAlertDialog(
                       context,
-                      "${AdminIdConstants.ADMINS_ID['deanshipofstudentaffairs']}",
+                      "${AdminIdConstants
+                          .ADMINS_ID['deanshipofstudentaffairs']}",
                       "شؤون الطلبة");
                 }),
                 buildContainer("المركز الصحي", () {

@@ -5,6 +5,7 @@ import 'package:step_by_step/mvc/views/auth/registration_screen.dart';
 import 'package:step_by_step/mvc/views/user/appointment_booking.dart';
 import 'package:step_by_step/mvc/views/user/book_reservation.dart';
 import 'package:step_by_step/mvc/views/user/home_page.dart';
+import 'package:step_by_step/mvc/views/user/show_turn.dart';
 
 class RoutesConstants {
   static const LOGIN_ROUTE_PATH = "login";
@@ -14,6 +15,7 @@ class RoutesConstants {
   static const APPOINTMENT_BOOKING_ROUTE_PATH = "appointment_booking";
   static const BOOK_RESERVATION_ROUTE_PATH = "book_reservation";
   static const LIBRARY_ADMIN_ROUTE_PATH =   "library_admin_page";
+  static const SHOW_TURN_ROUTE_PATH =   "show_turn";
 
   static getRoutesMap() {
     return {
@@ -24,6 +26,7 @@ class RoutesConstants {
       APPOINTMENT_BOOKING_ROUTE_PATH: (context) => AppointmentBooking(),
       BOOK_RESERVATION_ROUTE_PATH: (context) => BookReservation(),
       LIBRARY_ADMIN_ROUTE_PATH: (context) => LibraryAdmin(),
+      SHOW_TURN_ROUTE_PATH: (context) => ShowTurn(),
     };
   }
 }
