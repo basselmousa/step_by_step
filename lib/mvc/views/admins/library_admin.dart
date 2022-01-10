@@ -18,7 +18,8 @@ class _LibraryAdminState extends State<LibraryAdmin> {
   TextEditingController _bookNameController = new TextEditingController();
   TextEditingController _bookNumberController = new TextEditingController();
   TextEditingController _bookStatusController = new TextEditingController();
-  TextEditingController _bookDescriptionController = new TextEditingController();
+  TextEditingController _bookDescriptionController =
+      new TextEditingController();
   var _imageFile;
 
   final picker = ImagePicker();
@@ -32,7 +33,6 @@ class _LibraryAdminState extends State<LibraryAdmin> {
         .catchError((onError) {
       print(onError.toString());
     });
-
   }
 
   Future pickImageFromCamera() async {
@@ -45,7 +45,6 @@ class _LibraryAdminState extends State<LibraryAdmin> {
         .catchError((onError) {
       print(onError.toString());
     });
-
   }
 
   showAlertDialog(BuildContext context) {
@@ -188,7 +187,8 @@ class _LibraryAdminState extends State<LibraryAdmin> {
                 children: [
                   editTextWithCenterAlign(_bookNameController, "اسم الكتاب "),
                   editTextWithCenterAlign(_bookNumberController, "رقم الكتاب "),
-                  editTextWithCenterAlign(_bookDescriptionController, "وصف الكتاب "),
+                  editTextWithCenterAlign(
+                      _bookDescriptionController, "وصف الكتاب "),
                   editTextWithCenterAlign(
                       _bookStatusController, "خالة الكتاب "),
                   Row(
