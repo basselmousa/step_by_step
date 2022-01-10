@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:step_by_step/mvc/controllers/users/book_controller.dart';
+import 'package:step_by_step/mvc/helpers/constants/colors_constants.dart';
 import 'package:step_by_step/mvc/helpers/constants/font_constants.dart';
+import 'package:step_by_step/mvc/models/reservation_model.dart';
+import 'package:step_by_step/mvc/models/user_model.dart';
 
 class BookReservation extends StatefulWidget {
   const BookReservation({Key? key}) : super(key: key);
@@ -9,7 +14,7 @@ class BookReservation extends StatefulWidget {
 }
 
 class _BookReservationState extends State<BookReservation> {
-  showAlertDialog(BuildContext context) {
+  showAlertDialog(BuildContext context, String id, String name) {
     // set up the buttons
     Widget cancelButton = TextButton(
       child: Text("الغاء"),
@@ -19,7 +24,14 @@ class _BookReservationState extends State<BookReservation> {
     );
     Widget continueButton = TextButton(
       child: Text("تأكيد الحجز"),
-      onPressed: () {},
+      onPressed: () {
+        BookController().bookReservation(id, name, context).then((value) {
+          Navigator.of(context).pop();
+          setState(() {
+
+          });
+        });
+      },
     );
 
     // set up the AlertDialog
@@ -43,69 +55,143 @@ class _BookReservationState extends State<BookReservation> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    BookController.empty();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    User.getId();
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(100),
-              child: Center(
-                child: Container(
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset(
-                            "",
-                          ),
-                          Column(
+      body: Container(
+        child: StreamBuilder<QuerySnapshot>(
+            stream: BookController().getBooks(),
+            builder: (context, snapshot) {
+              return !snapshot.hasData
+                  ? Center(child: CircularProgressIndicator())
+                  : SizedBox(
+                width: MediaQuery
+                    .of(context)
+                    .size
+                    .width,
+                height: MediaQuery
+                    .of(context)
+                    .size
+                    .height,
+                child: ListView.builder(
+                  itemCount: snapshot.data!.size,
+                  itemBuilder: (context, index) {
+                    print(User.id);
+                    return Padding(
+                      padding: const EdgeInsets.all(100),
+                      child: Center(
+                        child: Container(
+                          child: Column(
                             children: [
-                              Text(
-                                'الاسم',
-                                style: TextStyle(
-                                    fontSize: FontConstants.TEXT_Font20,
-                                    fontWeight: FontWeight.bold),
+                              Row(
+                                children: [
+                                  Image.network(
+                                    snapshot.data!.docs[index]
+                                        .data()['imagePath'],
+                                    width: 150,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        'الاسم' +
+                                            snapshot.data!.docs[index]
+                                                .data()['name'],
+                                        style: TextStyle(
+                                            fontSize:
+                                            FontConstants.TEXT_Font20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        'الوصف' +
+                                            snapshot.data!.docs[index]
+                                                .data()['description'],
+                                        style: TextStyle(
+                                            fontSize:
+                                            FontConstants.TEXT_Font20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        'الحالة' +
+                                            snapshot.data!.docs[index]
+                                                .data()['status'],
+                                        style: TextStyle(
+                                            fontSize:
+                                            FontConstants.TEXT_Font20,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  )
+                                ],
                               ),
-                              Text(
-                                'الوصف',
-                                style: TextStyle(
-                                    fontSize: FontConstants.TEXT_Font20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                'الحالة',
-                                style: TextStyle(
-                                    fontSize: FontConstants.TEXT_Font20,
-                                    fontWeight: FontWeight.bold),
-                              ),
+                              Center(
+                                child:
+                                Reservation.reservations[snapshot
+                                    .data!.docs[index].id] != null ?
+                                Reservation.reservations[snapshot
+                                    .data!.docs[index].id]['userNumber'] !=
+                                    User.id ||
+                                    Reservation.reservations[snapshot.data!
+                                        .docs[index].id]['status'] == 'declined'
+                                    ?
+                                ElevatedButton(
+                                  onPressed: () {
+                                    showAlertDialog(context,
+                                        snapshot.data!.docs[index].id,
+                                        snapshot.data!.docs[index]
+                                            .data()['name']);
+                                  },
+                                  child: Text('احجز'),
+                                  style: ElevatedButton.styleFrom(
+                                    primary: Colors.blue,
+                                    onPrimary: Colors.black45,
+                                    textStyle: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: FontConstants.TEXT_Font20),
+                                  ),
+                                )
+                                    : Text(
+                                  Reservation.reservations[snapshot.data!
+                                      .docs[index].id]['status'],
+                                  style: TextStyle(color: ColorConstants
+                                      .statusColors[ Reservation
+                                      .reservations[snapshot.data!.docs[index]
+                                      .id]['status']], fontSize: 25),)
+
+                               : ElevatedButton(
+                                onPressed: () {
+                                  showAlertDialog(context,
+                                      snapshot.data!.docs[index].id,
+                                      snapshot.data!.docs[index]
+                                          .data()['name']);
+                                  setState(() {
+
+                                  });
+                                },
+                                child: Text('احجز'),
+                                style: ElevatedButton.styleFrom(
+                                  primary: Colors.blue,
+                                  onPrimary: Colors.black45,
+                                  textStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: FontConstants.TEXT_Font20),
+                                ),),
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                      Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            showAlertDialog(context);
-                          },
-                          child: Text("احجز"),
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.blue,
-                            onPrimary: Colors.black45,
-                            textStyle: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: FontConstants.TEXT_Font20),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
-              ),
-            )
-          ],
-        ),
+              );
+            }),
       ),
     );
   }

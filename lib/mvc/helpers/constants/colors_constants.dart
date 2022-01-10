@@ -7,4 +7,10 @@ class ColorConstants {
   static const Color COLOR_Black = Colors.black;
   static const Color COLOR_Black54 = Colors.black54;
   static const Color COLOR_Blue = Colors.blue;
+
+  static Map<String, Color> statusColors = {
+    'pending' : Colors.orange,
+    'success' : Colors.green,
+    'declined' : COLOR_Red
+};
 }

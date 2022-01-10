@@ -63,7 +63,10 @@ class UserController {
       sharedPreferences.setString("uid", userCredential.user.uid);
       buildSnackBar(context, "Logged In");
       print(userCredential.user.metadata);
-      await FirebaseFirestore.instance.collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME).doc(userCredential.user.uid).get().then((value) {
+      await FirebaseFirestore.instance.collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME)
+          .doc(userCredential.user.uid)
+          .get()
+          .then((value) {
         if(value.exists){
           if(value.data()['isAdmin']){
             switch(value.data()['type']){
@@ -79,6 +82,8 @@ class UserController {
               moveScreen(context, RoutesConstants.ADMIN_HOME_PAGE_ROUTE_PATH);
                 break;
               case 'library':
+                Admin.id = value.id;
+                Admin.type = value.data()['type'];
                 moveScreen(context, RoutesConstants.LIBRARY_ADMIN_ROUTE_PATH);
             }
           }
@@ -95,11 +100,6 @@ class UserController {
         buildSnackBar(context, 'Wrong password provided for that user.');
       }
     }
-  }
-
-  resetPassword(String email, BuildContext context) async{
-    await FirebaseAuth.instance.sendPasswordResetEmail(email: email).whenComplete(() => buildSnackBar(context, "reseated"));
-
   }
 
 }
