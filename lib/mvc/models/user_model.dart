@@ -11,8 +11,13 @@ class User with ChangeNotifier {
   String password;
   String? uid;
   static String id = '';
-  DateTime? _expiryDate;
-  Timer? _authTimer;
+  static int _turn = 0;
+
+  static int get turn => _turn;
+
+  static set turn(int value) {
+    _turn = value;
+  }
 
   User(
       {required this.fullName,

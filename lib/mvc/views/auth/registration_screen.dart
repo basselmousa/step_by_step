@@ -57,17 +57,20 @@ bool trySignUp = false;
                   margin: EdgeInsets.only(top: 30),
                   child: ElevatedButton(
                     onPressed: () {
+                      if(validated()){
                       setState(() {
                         trySignUp = true;
                       });
-                      UserController().signUp(
-                          returnEmail(_idController.text),
-                          _passwordNameController.text,
-                          _fullNameController.text,
 
-                          context).whenComplete(() => setState((){
-                        trySignUp = false;
-                      }));
+                        UserController().signUp(
+                            returnEmail(_idController.text),
+                            _passwordNameController.text,
+                            _fullNameController.text,
+
+                            context).whenComplete(() => setState((){
+                          trySignUp = false;
+                        }));
+                      }
                     },
                     child: trySignUp ? CircularProgressIndicator() : Text("Create Account"),
                     style: ElevatedButton.styleFrom(
@@ -85,5 +88,27 @@ bool trySignUp = false;
         ),
       ),
     );
+  }
+
+  bool validated(){
+
+    if(_idController.text.isEmpty){
+      buildSnackBar(context, "ID is required");
+      return false;
+    }
+    else if(_fullNameController.text.isEmpty){
+      buildSnackBar(context, "Full Name is required");
+      return false;
+    }
+    else if(_passwordNameController.text.isEmpty){
+      buildSnackBar(context, "Password is required");
+      return false;
+    }
+    else if(_confirmPasswordNameController.text.isEmpty || _confirmPasswordNameController.text != _passwordNameController.text){
+      buildSnackBar(context, "Password does not matched");
+      return false;
+    }
+
+    return true;
   }
 }

@@ -11,7 +11,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:step_by_step/mvc/utils/utils.dart';
 
 class UserController {
-  Future<void> signUp(String idNumber, String password, String fullName, BuildContext context) async {
+  Future<void> signUp(String idNumber, String password, String fullName,
+      BuildContext context) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: idNumber, password: password);
@@ -20,16 +21,18 @@ class UserController {
       await FirebaseFirestore.instance
           .collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME)
           .doc(userCredential.user.uid)
-          .set({
-        "fullName": fullName,
-        "email": idNumber,
-        "password": password,
-        "isAdmin":false,
-      },);
+          .set(
+        {
+          "fullName": fullName,
+          "email": idNumber,
+          "password": password,
+          "isAdmin": false,
+        },
+      );
       buildSnackBar(context, "User Created");
 
-      SharedPreferences sharedPreferences = await SharedPreferences
-          .getInstance();
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
       sharedPreferences.setString("email", idNumber);
       sharedPreferences.setString("password", password);
       sharedPreferences.setString("uid", userCredential.user.uid);
@@ -46,30 +49,31 @@ class UserController {
       }
     } catch (e) {
       print(e);
-      ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(e.toString())));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(e.toString())));
     }
   }
 
-  Future<void> login(String email, String password,
-      BuildContext context) async {
+  Future<void> login(
+      String email, String password, BuildContext context) async {
     try {
       UserCredential userCredential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      SharedPreferences sharedPreferences = await SharedPreferences
-          .getInstance();
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
       sharedPreferences.setString("email", email);
       sharedPreferences.setString("password", password);
       sharedPreferences.setString("uid", userCredential.user.uid);
       buildSnackBar(context, "Logged In");
       print(userCredential.user.metadata);
-      await FirebaseFirestore.instance.collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME)
+      await FirebaseFirestore.instance
+          .collection(FirebaseCollectionNamesConstants.USER_COLLECTION_NAME)
           .doc(userCredential.user.uid)
           .get()
           .then((value) {
-        if(value.exists){
-          if(value.data()['isAdmin']){
-            switch(value.data()['type']){
+        if (value.exists) {
+          if (value.data()['isAdmin']) {
+            switch (value.data()['type']) {
               case 'militaryservice':
               case 'deanshipofstudentaffairs':
               case 'healthcenter':
@@ -79,20 +83,18 @@ class UserController {
               case 'dean':
                 Admin.id = value.id;
                 Admin.type = value.data()['type'].toString();
-              moveScreen(context, RoutesConstants.ADMIN_HOME_PAGE_ROUTE_PATH);
+                moveScreen(context, RoutesConstants.ADMIN_HOME_PAGE_ROUTE_PATH);
                 break;
               case 'library':
                 Admin.id = value.id;
                 Admin.type = value.data()['type'];
                 moveScreen(context, RoutesConstants.LIBRARY_ADMIN_ROUTE_PATH);
             }
-          }
-          else{
+          } else {
             moveScreen(context, RoutesConstants.BOOK_RESERVATION_ROUTE_PATH);
           }
         }
       });
-
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         buildSnackBar(context, 'No user found for that email.');
@@ -102,4 +104,10 @@ class UserController {
     }
   }
 
+  Stream<DocumentSnapshot> getTurn(String id, [bool inc= true]) {
+    return FirebaseFirestore.instance
+        .collection(FirebaseCollectionNamesConstants.ROLES_COLLECTION_NAME)
+        .doc(id)
+        .snapshots(includeMetadataChanges: inc);
+  }
 }
