@@ -3,6 +3,7 @@ import 'package:step_by_step/mvc/controllers/admins/admin_controller.dart';
 import 'package:step_by_step/mvc/helpers/constants/admins_id_constants.dart';
 import 'package:step_by_step/mvc/helpers/constants/font_constants.dart';
 import 'package:step_by_step/mvc/helpers/routes/app_routes.dart';
+import 'package:step_by_step/mvc/models/role_model.dart';
 import 'package:step_by_step/mvc/models/user_model.dart';
 import 'package:step_by_step/mvc/utils/utils.dart';
 import 'package:step_by_step/mvc/views/widgets/container_widget.dart';
@@ -27,8 +28,11 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
        await AdminController.addOrUpdateRole(context: context, id: id, func: (int turn) => setState((){
           User.turn = turn;
         })).then(
-            (value) => moveScreen(context, RoutesConstants.SHOW_TURN_ROUTE_PATH,
-                replacement: false, data: {'id': id})).whenComplete(() {
+            (value) {
+              Role.type = id;
+              return moveScreen(context, RoutesConstants.SHOW_TURN_ROUTE_PATH,
+                replacement: false, data: {'id': id});
+            }).whenComplete(() {
                   setState(() {
 
                   });

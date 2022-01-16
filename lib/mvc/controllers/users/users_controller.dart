@@ -110,4 +110,13 @@ class UserController {
         .doc(id)
         .snapshots(includeMetadataChanges: inc);
   }
+
+  Future<int> myTurn(String id) async{
+    int turn=0;
+    await FirebaseFirestore.instance.collection(FirebaseCollectionNamesConstants.ROLES_COLLECTION_NAME).doc(id).get().then((value){
+      turn = value.data()['turn'];
+    });
+
+    return turn;
+  }
 }
