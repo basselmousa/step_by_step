@@ -105,6 +105,7 @@ class _LibraryAdminState extends State<LibraryAdmin> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: ColorConstants.COLOR_grey,
         appBar: AppBar(
           bottom: TabBar(indicatorColor: Colors.amberAccent, tabs: [
             Tab(
@@ -244,14 +245,42 @@ class _LibraryAdminState extends State<LibraryAdmin> {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      editTextWithCenterAlign(
-                          _bookNameController, "اسم الكتاب "),
-                      editTextWithCenterAlign(
-                          _bookNumberController, "رقم الكتاب "),
-                      editTextWithCenterAlign(
-                          _bookDescriptionController, "وصف الكتاب "),
-                      editTextWithCenterAlign(
-                          _bookStatusController, "حالة الكتاب "),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: ColorConstants.COLOR_White,
+                        ),
+                        margin: EdgeInsets.only(left: 50, right: 50, top: 30),
+                        child: editTextWithCenterAlign(
+                            _bookNameController, "اسم الكتاب "),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: ColorConstants.COLOR_White,
+                        ),
+                        margin: EdgeInsets.only(left: 50, right: 50, top: 30),
+                        child: editTextWithCenterAlign(
+                            _bookNumberController, "رقم الكتاب "),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: ColorConstants.COLOR_White,
+                        ),
+                        margin: EdgeInsets.only(left: 50, right: 50, top: 30),
+                        child: editTextWithCenterAlign(
+                            _bookDescriptionController, "وصف الكتاب "),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(25),
+                          color: ColorConstants.COLOR_White,
+                        ),
+                        margin: EdgeInsets.only(left: 50, right: 50, top: 30,bottom: 20),
+                        child: editTextWithCenterAlign(
+                            _bookStatusController, "حالة الكتاب "),
+                      ),
                       Row(
                         // mainAxisSize: MainAxisSize.min,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

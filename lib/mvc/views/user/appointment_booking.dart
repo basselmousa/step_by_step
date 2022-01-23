@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:step_by_step/mvc/controllers/admins/admin_controller.dart';
 import 'package:step_by_step/mvc/helpers/constants/admins_id_constants.dart';
+import 'package:step_by_step/mvc/helpers/constants/colors_constants.dart';
 import 'package:step_by_step/mvc/helpers/constants/font_constants.dart';
 import 'package:step_by_step/mvc/helpers/routes/app_routes.dart';
 import 'package:step_by_step/mvc/models/role_model.dart';
@@ -42,7 +43,7 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("حجز كتاب"),
+      title: Text("حجز دور"),
       content: Text("هل تود تأكيد حجزك مع $name"),
       actions: [
         cancelButton,
@@ -68,6 +69,8 @@ class _AppointmentBookingState extends State<AppointmentBooking> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('حجز دور'),centerTitle: true,),
+      backgroundColor: ColorConstants.COLOR_grey,
       body: Column(
         children: [
           Padding(

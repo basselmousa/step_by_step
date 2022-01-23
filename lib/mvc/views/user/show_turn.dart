@@ -36,7 +36,7 @@ class _ShowTurnState extends State<ShowTurn> {
     print(User.turn);
     Map<String, dynamic > aID = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     return Scaffold(
-      backgroundColor: ColorConstants.COLOR_White,
+      backgroundColor: ColorConstants.COLOR_grey,
       body: Center(
         child: Container(
             child: Column(

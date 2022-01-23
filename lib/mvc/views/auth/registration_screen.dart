@@ -23,37 +23,62 @@ bool trySignUp = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstants.COLOR_White,
+      backgroundColor: ColorConstants.COLOR_grey,
       body: Center(
         child: Container(
           padding: EdgeInsets.only(top: 10),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                Container(
+                Container(decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: ColorConstants.COLOR_White,
+
+
+                ),
                   padding: EdgeInsets.only(left: 10),
                   child: editTextWithCenterAlign(_idController, "ID Number"),
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                 ),
                 Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: ColorConstants.COLOR_White,
+
+
+                  ),
                   padding: EdgeInsets.only(left: 10),
                   child:
                       editTextWithCenterAlign(_fullNameController, "Full Name"),
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                 ),
                 Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: ColorConstants.COLOR_White,
+
+
+                  ),
                   padding: EdgeInsets.only(left: 10),
                   child: editTextWithCenterAlign(
-                      _passwordNameController, "Password"),
+                      _passwordNameController, "Password",password: true),
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                 ),
                 Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: ColorConstants.COLOR_White,
+
+
+                  ),
                   padding: EdgeInsets.only(left: 10),
+
                   child: editTextWithCenterAlign(
-                      _confirmPasswordNameController, "Confirm Password"),
+                      _confirmPasswordNameController, "Confirm Password",password: true),
                   margin: EdgeInsets.only(left: 20, right: 20, top: 30),
                 ),
                 Container(
+
                   margin: EdgeInsets.only(top: 30),
                   child: ElevatedButton(
                     onPressed: () {
@@ -74,7 +99,7 @@ bool trySignUp = false;
                     },
                     child: trySignUp ? CircularProgressIndicator() : Text("Create Account"),
                     style: ElevatedButton.styleFrom(
-                      primary: ColorConstants.COLOR_Red,
+                      primary: ColorConstants.COLOR_green,
                       onPrimary: Colors.black45,
                       textStyle: TextStyle(
                           fontWeight: FontWeight.bold,

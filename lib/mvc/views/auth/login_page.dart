@@ -50,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorConstants.COLOR_White,
+      backgroundColor: ColorConstants.COLOR_grey,
       body: tryLoginIn
           ? Center(
               child: CircularProgressIndicator(),
@@ -61,15 +61,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   children: [
                     Container(
-                      color: ColorConstants.COLOR_White,
+                decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(25),
+                color: ColorConstants.COLOR_White,
+
+
+                  ),
+
                       child:
                           editTextWithCenterAlign(_idController, "ID Number"),
                       margin: EdgeInsets.only(left: 50, right: 50, top: 90),
                     ),
                     Container(
-                      color: ColorConstants.COLOR_White,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(25),
+                        color: ColorConstants.COLOR_White,
+
+
+                      ),
                       child: editTextWithCenterAlign(
-                          _passwordController, "password"),
+                          _passwordController, "password",password: true),
                       margin: EdgeInsets.only(left: 50, right: 50, top: 30),
                     ),
                     Container(
@@ -87,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text("Login"),
                         style: ElevatedButton.styleFrom(
-                          primary: ColorConstants.COLOR_White,
+                          primary: Colors.blueGrey,
                           onPrimary: ColorConstants.COLOR_Black54,
                           textStyle: TextStyle(
                               fontWeight: FontWeight.bold,

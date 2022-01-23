@@ -38,7 +38,7 @@ class _BookReservationState extends State<BookReservation> {
     AlertDialog alert = AlertDialog(
       title: Text("حجز كتاب"),
       content: Text(
-          "Would you like to continue learning how to use Flutter alerts?"),
+          "هل تود تأكيد حجزك للكتاب؟"),
       actions: [
         cancelButton,
         continueButton,
@@ -65,6 +65,8 @@ class _BookReservationState extends State<BookReservation> {
   Widget build(BuildContext context) {
     User.getId();
     return Scaffold(
+      appBar: AppBar(title: Text('حجز كتاب'),centerTitle: true,),
+      backgroundColor: ColorConstants.COLOR_grey,
       body: Container(
         child: StreamBuilder<QuerySnapshot>(
             stream: BookController().getBooks(),
@@ -95,7 +97,7 @@ class _BookReservationState extends State<BookReservation> {
                                   Image.network(
                                     snapshot.data!.docs[index]
                                         .data()['imagePath'],
-                                    width: 150,
+                                    width: 100,
                                   ),
                                   Column(
                                     children: [

@@ -13,7 +13,7 @@ class AdminHomePage extends StatelessWidget {
     print(Admin.id);
     print(Admin.type);
     return Scaffold(
-      backgroundColor: ColorConstants.COLOR_White,
+      backgroundColor: ColorConstants.COLOR_grey,
       body: StreamBuilder<DocumentSnapshot>(
         stream: AdminController().getTurns(Admin.id),
         builder: (context, snapshot) {
