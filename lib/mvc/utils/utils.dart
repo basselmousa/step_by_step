@@ -21,5 +21,5 @@ String returnEmail(String id){
 }
 
 buildSnackBar(context, String text){
-  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text), duration: Duration(milliseconds: 500),));
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(text), duration: Duration(seconds: 3),));
 }

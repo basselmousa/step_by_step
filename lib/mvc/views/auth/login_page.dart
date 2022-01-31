@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:step_by_step/mvc/controllers/users/users_controller.dart';
 import 'package:step_by_step/mvc/helpers/constants/colors_constants.dart';
 import 'package:step_by_step/mvc/helpers/constants/font_constants.dart';
+import 'package:step_by_step/mvc/helpers/constants/image_constatns.dart';
 import 'package:step_by_step/mvc/helpers/routes/app_routes.dart';
 import 'package:step_by_step/mvc/utils/utils.dart';
 import 'package:step_by_step/mvc/views/widgets/edit_text_widget.dart';
@@ -56,7 +57,18 @@ class _LoginScreenState extends State<LoginScreen> {
               child: CircularProgressIndicator(),
             )
           : Container(
-              padding: EdgeInsets.only(top: 10),
+
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(ImageConstants.backGround),
+              fit: BoxFit.cover),
+          border: Border.all(
+              color: Colors.black, // Set border color
+              width: 3.0), // Set border width
+          // Set rounded corner radius
+        ),
+              padding: EdgeInsets.only(top: 100),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
@@ -64,6 +76,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 color: ColorConstants.COLOR_White,
+                  border: Border.all(
+                      color: Colors.black, // Set border color
+                      width: 3.0),
 
 
                   ),
@@ -76,6 +91,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(25),
                         color: ColorConstants.COLOR_White,
+
+                        border: Border.all(
+                            color: Colors.black, // Set border color
+                            width: 3.0),
 
 
                       ),
@@ -98,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: Text("Login"),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.blueGrey,
+                          primary: Colors.green,
                           onPrimary: ColorConstants.COLOR_Black54,
                           textStyle: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -106,16 +125,19 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    TextButton(
-                      onPressed: () {
-                        moveScreen(
-                            context, RoutesConstants.REGISTRATION_ROUTE_PATH);
-                      },
-                      child: Text(
-                        "Create account",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: FontConstants.TEXT_Font13),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: TextButton(
+                        onPressed: () {
+                          moveScreen(
+                              context, RoutesConstants.REGISTRATION_ROUTE_PATH);
+                        },
+                        child: Text(
+                          "Create account",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: FontConstants.TEXT_Font20,color: Colors.black),
+                        ),
                       ),
                     )
                   ],

@@ -7,6 +7,7 @@ import 'package:step_by_step/mvc/controllers/admins/admin_controller.dart';
 import 'package:step_by_step/mvc/controllers/users/book_controller.dart';
 import 'package:step_by_step/mvc/helpers/constants/colors_constants.dart';
 import 'package:step_by_step/mvc/helpers/constants/font_constants.dart';
+import 'package:step_by_step/mvc/helpers/constants/image_constatns.dart';
 import 'package:step_by_step/mvc/models/book_model.dart';
 import 'package:step_by_step/mvc/views/widgets/edit_text_widget.dart';
 
@@ -106,7 +107,7 @@ class _LibraryAdminState extends State<LibraryAdmin> {
       length: 2,
       child: Scaffold(
         backgroundColor: ColorConstants.COLOR_grey,
-        appBar: AppBar(
+        appBar: AppBar(title: Text('المكتبة'),centerTitle: true,
           bottom: TabBar(indicatorColor: Colors.amberAccent, tabs: [
             Tab(
               child: Text(
@@ -139,162 +140,201 @@ class _LibraryAdminState extends State<LibraryAdmin> {
                               ? Center(
                                   child: Text("No Reservations Request"),
                                 )
-                              : ListView.builder(
-                                  itemCount: snapshot.data!.size,
-                                  itemBuilder: (context, index) {
-                                    return SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: Row(
-                                          children: [
-                                            Text(
-                                              snapshot.data!.docs[index]
-                                                  .data()['bookName']
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: FontConstants
-                                                      .TEXT_Font20),
-                                            ),
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 8)),
-                                            Text(
-                                              snapshot.data!.docs[index]
-                                                  .data()['userName']
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: FontConstants
-                                                      .TEXT_Font20),
-                                            ),
-                                            Text(
-                                              snapshot.data!.docs[index]
-                                                  .data()['userNumber']
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: FontConstants
-                                                      .TEXT_Font20),
-                                            ),
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 15)),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                AdminController().reservedBook(
-                                                    snapshot
-                                                        .data!.docs[index].id,
-                                                    'success',
-                                                    context);
-                                              },
-                                              child: Text("قبول"),
-                                              style: ElevatedButton.styleFrom(
-                                                primary:
-                                                    ColorConstants.COLOR_White,
-                                                onPrimary:
-                                                    ColorConstants.COLOR_Red,
-                                                textStyle: TextStyle(
-                                                    color: ColorConstants
-                                                        .COLOR_Black,
+                              : Container(
+                        height: double.infinity,
+                        decoration: BoxDecoration
+                          (
+                          image: DecorationImage(
+                              image: AssetImage(ImageConstants.backGround),
+                              fit: BoxFit.cover),
+                          border: Border.all(
+                              color: Colors.black, // Set border color
+                              width: 3.0), // Set border width
+                          // Set rounded corner radius
+                        ),
+                                child: ListView.builder(
+                                    itemCount: snapshot.data!.size,
+                                    itemBuilder: (context, index) {
+                                      return SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(top: 10),
+                                          child: Row(
+                                            children: [
+                                              Text(
+                                                snapshot.data!.docs[index]
+                                                    .data()['bookName']
+                                                    .toString(),
+                                                style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: FontConstants
                                                         .TEXT_Font20),
                                               ),
-                                            ),
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 8)),
-                                            ElevatedButton(
-                                              onPressed: () {
-                                                AdminController().reservedBook(
-                                                    snapshot
-                                                        .data!.docs[index].id,
-                                                    'declined',
-                                                    context);
-                                              },
-                                              child: Text("رفض"),
-                                              style: ElevatedButton.styleFrom(
-                                                primary:
-                                                    ColorConstants.COLOR_White,
-                                                onPrimary:
-                                                    ColorConstants.COLOR_Red,
-                                                textStyle: TextStyle(
-                                                    color: ColorConstants
-                                                        .COLOR_Black,
+                                              Padding(
+                                                  padding:
+                                                      EdgeInsets.only(right: 8)),
+                                              Text(
+                                                snapshot.data!.docs[index]
+                                                    .data()['userName']
+                                                    .toString(),
+                                                style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: FontConstants
                                                         .TEXT_Font20),
                                               ),
-                                            ),
-                                            Padding(
-                                                padding:
-                                                    EdgeInsets.only(right: 8)),
-                                          ],
+                                              Padding(
+                                                  padding:
+                                                  EdgeInsets.only(right: 8)),
+                                              Text(
+                                                snapshot.data!.docs[index]
+                                                    .data()['userNumber']
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: FontConstants
+                                                        .TEXT_Font20),
+                                              ),
+                                              Padding(
+                                                  padding:
+                                                      EdgeInsets.only(right: 15)),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  AdminController().reservedBook(
+                                                      snapshot
+                                                          .data!.docs[index].id,
+                                                      'success',
+                                                      context);
+                                                },
+                                                child: Text("قبول"),
+                                                style: ElevatedButton.styleFrom(
+                                                  primary:
+                                                      ColorConstants.COLOR_White,
+                                                  onPrimary:
+                                                      ColorConstants.COLOR_Red,
+                                                  textStyle: TextStyle(
+                                                      color: ColorConstants
+                                                          .COLOR_Black,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: FontConstants
+                                                          .TEXT_Font20),
+                                                ),
+                                              ),
+                                              Padding(
+                                                  padding:
+                                                      EdgeInsets.only(right: 8)),
+                                              ElevatedButton(
+                                                onPressed: () {
+                                                  AdminController().reservedBook(
+                                                      snapshot
+                                                          .data!.docs[index].id,
+                                                      'declined',
+                                                      context);
+                                                },
+                                                child: Text("رفض"),
+                                                style: ElevatedButton.styleFrom(
+                                                  primary:
+                                                      ColorConstants.COLOR_White,
+                                                  onPrimary:
+                                                      ColorConstants.COLOR_Red,
+                                                  textStyle: TextStyle(
+                                                      color: ColorConstants
+                                                          .COLOR_Black,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: FontConstants
+                                                          .TEXT_Font20),
+                                                ),
+                                              ),
+                                              Padding(
+                                                  padding:
+                                                      EdgeInsets.only(right: 8)),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    );
-                                  })
+                                      );
+                                    }),
+                              )
                           : Center(child: CircularProgressIndicator());
                     });
               }),
-          Center(
-            child: SingleChildScrollView(
-              child: Container(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: ColorConstants.COLOR_White,
-                        ),
-                        margin: EdgeInsets.only(left: 50, right: 50, top: 30),
-                        child: editTextWithCenterAlign(
-                            _bookNameController, "اسم الكتاب "),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: ColorConstants.COLOR_White,
-                        ),
-                        margin: EdgeInsets.only(left: 50, right: 50, top: 30),
-                        child: editTextWithCenterAlign(
-                            _bookNumberController, "رقم الكتاب "),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: ColorConstants.COLOR_White,
-                        ),
-                        margin: EdgeInsets.only(left: 50, right: 50, top: 30),
-                        child: editTextWithCenterAlign(
-                            _bookDescriptionController, "وصف الكتاب "),
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(25),
-                          color: ColorConstants.COLOR_White,
-                        ),
-                        margin: EdgeInsets.only(left: 50, right: 50, top: 30,bottom: 20),
-                        child: editTextWithCenterAlign(
-                            _bookStatusController, "حالة الكتاب "),
-                      ),
-                      Row(
-                        // mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Container(
+            height: double.infinity,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage(ImageConstants.backGround),
+                  fit: BoxFit.cover),
+              // Set border width
+              // Set rounded corner radius
+            ),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Container(
 
-                        children: [
-                          ElevatedButton(
-                              onPressed: () => pickImageFromGallery(),
-                              child: Text("From Gallery")),
-                          ElevatedButton(
-                              onPressed: () => pickImageFromCamera(),
-                              child: Text("Camera")),
-                        ],
-                      ),
-                    ]),
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.black, // Set border color
+                                width: 3.0),
+                            borderRadius: BorderRadius.circular(25),
+                            color: ColorConstants.COLOR_White,
+                          ),
+                          margin: EdgeInsets.only(left: 50, right: 50, top: 30),
+                          child: editTextWithCenterAlign(
+                              _bookNameController, "اسم الكتاب "),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.black, // Set border color
+                                width: 3.0),
+                            borderRadius: BorderRadius.circular(25),
+                            color: ColorConstants.COLOR_White,
+                          ),
+                          margin: EdgeInsets.only(left: 50, right: 50, top: 30),
+                          child: editTextWithCenterAlign(
+                              _bookNumberController, "رقم الكتاب "),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.black, // Set border color
+                                width: 3.0),
+                            borderRadius: BorderRadius.circular(25),
+                            color: ColorConstants.COLOR_White,
+                          ),
+                          margin: EdgeInsets.only(left: 50, right: 50, top: 30),
+                          child: editTextWithCenterAlign(
+                              _bookDescriptionController, "وصف الكتاب "),
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: Colors.black, // Set border color
+                                width: 3.0),
+                            borderRadius: BorderRadius.circular(25),
+                            color: ColorConstants.COLOR_White,
+                          ),
+                          margin: EdgeInsets.only(left: 50, right: 50, top: 30,bottom: 20),
+                          child: editTextWithCenterAlign(
+                              _bookStatusController, "حالة الكتاب "),
+                        ),
+                        Row(
+                          // mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                          children: [
+                            ElevatedButton(
+                                onPressed: () => pickImageFromGallery(),
+                                child: Text("From Gallery")),
+                            ElevatedButton(
+                                onPressed: () => pickImageFromCamera(),
+                                child: Text("Camera")),
+                          ],
+                        ),
+                      ]),
+                ),
               ),
             ),
           ),
